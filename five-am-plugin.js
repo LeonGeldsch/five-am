@@ -18,7 +18,7 @@ var burgerUpper = document.querySelector(".burger.upper");
 
 var burgerLower = document.querySelector(".burger.lower");
 
-var allATags = document.querySelectorAll(".object-wrapper, .lab-wrapper");
+var hoverEffectImages = document.querySelectorAll(".object-wrapper, .lab-wrapper");
 
 (function () {
 
@@ -66,24 +66,28 @@ menuGradientLight.addEventListener("click", function() {
     menuWrapper.click();
 });
 
+console.log(hoverEffectImages);
+
 
 $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', function() {
     console.log("loaded gsap");
-    allATags.forEach(aTag => {
-        aTag.addEventListener('mouseover', function () {
-            gsap.to(aTag, {
+    hoverEffectImages.forEach(hoverEffectImage => {
+        hoverEffectImage.addEventListener('mouseover', function () {
+            console.log("mouseover");
+            gsap.to(hoverEffectImage, {
                 scale: 1.15,
                 duration: 1,
                 ease: linear
             }); 
-        })
-        aTag.addEventListener('mouseleave', function () {
-            gsap.to(aTag, {
+        });
+        hoverEffectImage.addEventListener('mouseleave', function () {
+            console.log("mouseleave");
+            gsap.to(hoverEffectImage, {
                 scale: 1,
                 duration: 1,
                 ease: linear
             }); 
-        })
+        });
     });
 });
 
