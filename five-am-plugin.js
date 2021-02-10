@@ -28,6 +28,33 @@ var allCaseWrappers = document.querySelectorAll(".case_wrapper");
 
 var allButtonTextLights = document.querySelectorAll(".button-text.light");
 
+
+var newBadgeWrapper = document.createElement('div');
+newBadgeWrapper.classList.add('badge_wrapper');
+body.appendChild(newBadgeWrapper);
+newBadgeWrapper.style.zIndex = 1;
+
+
+var newBadgeWrapper2 = document.createElement('div');
+newBadgeWrapper2.classList.add('badge_wrapper');
+body.appendChild(newBadgeWrapper2);
+newBadgeWrapper2.style.zIndex = 0;
+newBadgeWrapper2.style.filter = 'invert()';
+
+
+var newBadgeImage = document.createElement('img');
+newBadgeImage.classList.add('image');
+newBadgeImage.style.position = 'relative';
+newBadgeImage.src = 'https://assets.website-files.com/5f2ec4e1f6e7e520923483ec/5f5b7f30c28b1f58bfb19241_5AM_Badge_Tomorrow.svg';
+newBadgeWrapper.appendChild(newBadgeImage);
+
+var newBadgeImage2 = document.createElement('img');
+newBadgeImage2.classList.add('image');
+newBadgeImage.style.position = 'relative';
+newBadgeImage2.src = 'https://assets.website-files.com/5f2ec4e1f6e7e520923483ec/5f5b7f30c28b1f58bfb19241_5AM_Badge_Tomorrow.svg';
+newBadgeWrapper2.appendChild(newBadgeImage2);
+
+
 (function () {
 
     function loadScript(url, callback) {
@@ -61,14 +88,52 @@ var allButtonTextLights = document.querySelectorAll(".button-text.light");
 
 })();
 
-
+/*
 window.addEventListener('scroll', function() {
-    if (parseInt(badgeWrapper.getBoundingClientRect().top) + parseInt(badgeWrapper.offsetHeight) * 0.5 >= parseInt(sectionGrey.getBoundingClientRect().top) && parseInt(badgeWrapper.getBoundingClientRect().top) + parseInt(badgeWrapper.offsetHeight) * 0.5 <= parseInt(sectionGrey.getBoundingClientRect().top) + parseInt(sectionGrey.offsetHeight)) {
+    if (parseInt(badgeWrapper.getBoundingClientRect().top) + parseInt(badgeWrapper.offsetHeight) * 0.6 >= parseInt(sectionGrey.getBoundingClientRect().top) && parseInt(badgeWrapper.getBoundingClientRect().top) + parseInt(badgeWrapper.offsetHeight) * 0.6 <= parseInt(sectionGrey.getBoundingClientRect().top) + parseInt(sectionGrey.offsetHeight)) {
         badge.style.filter = "invert()";
     } else {
         badge.style.filter = "none";
     }
 });
+*/
+
+
+
+
+
+
+window.addEventListener('scroll', function() {
+
+    let sectionGreyY = parseInt(sectionGrey.getBoundingClientRect().top);
+    let newBadgeWrapperY = parseInt(newBadgeWrapper.getBoundingClientRect().top);
+    let sectionGreyHeight = parseInt(sectionGrey.offsetHeight);
+    //let newBadgeWrapperHeight = parseInt(sectionGrey.offsetHeight);
+
+
+    if (sectionGreyY + 100 >= newBadgeWrapperY) {
+        let clipPathVar = ( newBadgeWrapperY - sectionGreyY + 100 ).toString();
+        newBadgeWrapper.style.clipPath = 'inset(0px 0px ' + clipPathVar + 'px 0px)';
+        newBadgeWrapper.style.zIndex = 1;
+        newBadgeWrapper2.style.zIndex = 0;
+        newBadgeWrapper2.style.clipPath = '';
+        //console.log(parseInt(newBadgeWrapper.getBoundingClientRect().top) - parseInt(sectionGrey.getBoundingClientRect().top));    
+        //console.log('inset(0px 0px ' + clipPathVar + 'px 0px)');
+    } else {
+        console.log('below');
+        let clipPathVar = ( newBadgeWrapperY - (sectionGreyY + sectionGreyHeight) + 100 ).toString();
+        newBadgeWrapper2.style.clipPath = 'inset(0px 0px ' + clipPathVar + 'px 0px)';
+        newBadgeWrapper2.style.zIndex = 1;
+        newBadgeWrapper.style.zIndex = 0;
+        newBadgeWrapper.style.clipPath = '';
+    }
+});
+
+
+
+
+
+
 
 menuGradientLight.addEventListener("click", function() {
     menuWrapper.click();
@@ -80,12 +145,40 @@ allCaseWrappers.forEach(caseWrapper => {
 
 allButtonTextLights[1].style.color = "#333";
 
+badgeWrapper.style.display = 'none';
 
 $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', function() {
     console.log("loaded gsap");
     $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js', function() {
         console.log("loaded scrolltrigger");
         gsap.registerPlugin(ScrollTrigger);
+
+        gsap.set(newBadgeImage, {
+            rotation: "-=200",
+            ease: 'none'
+        });
+        gsap.set(newBadgeImage2, {
+            rotation: "-=200",
+            ease: 'none'
+        });
+        gsap.to(newBadgeImage, {
+            rotation: "-=" + 360 * 6,
+            ease: 'none',
+            scrollTrigger: {
+                scrub: true,
+                start: 'top top',
+                end: '+=10000'            
+            }
+        });
+        gsap.to(newBadgeImage2, {
+            rotation: "-=" + 360 * 6,
+            ease: 'none',
+            scrollTrigger: {
+                scrub: true,
+                start: 'top top',
+                end: '+=10000'            
+            }
+        });
 
         gsap.to(bigTextPreFooter, {
             backgroundPosition: "50% 0%",
@@ -123,18 +216,23 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
     
         allImages.forEach(image => {
             image.addEventListener('mouseover', function () {
-                gsap.to(image, {
-                    borderRadius: 20,
-                    duration: 0.2,
-                    scale: 1.02
-                });
-            });
-            image.addEventListener('mouseleave', function () {
-                gsap.to(image, {
-                    borderRadius: 0,
-                    duration: 0.2,
-                    scale: 1
-                });
+                if (image.style.transform != 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg)') {
+                    image.addEventListener('mouseover', function () {
+                        console.log(image.style.transform);
+                        gsap.to(image, {
+                            borderRadius: 20,
+                            duration: 0.2,
+                            scale: 1.02
+                        });
+                    });
+                    image.addEventListener('mouseleave', function () {
+                        gsap.to(image, {
+                            borderRadius: 0,
+                            duration: 0.2,
+                            scale: 1
+                        });
+                    });
+                }
             });
         });
     });
