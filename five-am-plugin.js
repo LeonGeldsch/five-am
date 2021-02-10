@@ -18,7 +18,7 @@ var burgerUpper = document.querySelector(".burger.upper");
 
 var burgerLower = document.querySelector(".burger.lower");
 
-var hoverEffectImages = document.querySelectorAll(".object-wrapper, .lab-wrapper");
+var hoverEffectImages = document.querySelectorAll(".object-wrapper, .lab_wrapper");
 
 (function () {
 
@@ -55,7 +55,7 @@ var hoverEffectImages = document.querySelectorAll(".object-wrapper, .lab-wrapper
 
 
 window.addEventListener('scroll', function() {
-    if (parseInt(badgeWrapper.getBoundingClientRect().top) >= parseInt(sectionGrey.getBoundingClientRect().top) && parseInt(badgeWrapper.getBoundingClientRect().top) <= parseInt(sectionGrey.getBoundingClientRect().top) + parseInt(sectionGrey.offsetHeight)) {
+    if (parseInt(badgeWrapper.getBoundingClientRect().top) - parseInt(badgeWrapper.offsetHeight) >= parseInt(sectionGrey.getBoundingClientRect().top) && parseInt(badgeWrapper.getBoundingClientRect().top) - parseInt(badgeWrapper.offsetHeight) <= parseInt(sectionGrey.getBoundingClientRect().top) + parseInt(sectionGrey.offsetHeight)) {
         badge.style.filter = "invert()";
     } else {
         badge.style.filter = "none";
@@ -77,7 +77,7 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
             gsap.to(hoverEffectImage, {
                 scale: 1.15,
                 duration: 1,
-                ease: linear
+                ease: power1
             }); 
         });
         hoverEffectImage.addEventListener('mouseleave', function () {
@@ -85,7 +85,7 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
             gsap.to(hoverEffectImage, {
                 scale: 1,
                 duration: 1,
-                ease: linear
+                ease: power1
             }); 
         });
     });
