@@ -176,7 +176,7 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
             scrollTrigger: {
                 trigger: ".big-text.pre-footer",
                 start: "-=700",
-                end: "+=700",
+                end: "+=1000",
                 scrub: true
             }
         });
