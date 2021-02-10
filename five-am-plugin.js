@@ -94,6 +94,7 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
 
         gsap.to(bigTextPreFooter, {
             backgroundPosition: "50% 40%",
+            filter: 'hue-rotate(90deg)',
             scrollTrigger: {
                 trigger: ".big-text.pre-footer",
                 start: "-=500",
