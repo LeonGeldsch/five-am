@@ -22,6 +22,8 @@ var hoverEffectImages = document.querySelectorAll(".object-wrapper, .lab_wrapper
 
 var allImages = document.querySelectorAll(".case-image, .team-image");
 
+var teamImage = document.querySelector(".team-image");
+
 var bigTextPreFooter = document.querySelector(".big-text.pre-footer");
 
 var allCaseWrappers = document.querySelectorAll(".case_wrapper");
@@ -88,19 +90,6 @@ newBadgeWrapper2.appendChild(newBadgeImage2);
 
 })();
 
-/*
-window.addEventListener('scroll', function() {
-    if (parseInt(badgeWrapper.getBoundingClientRect().top) + parseInt(badgeWrapper.offsetHeight) * 0.6 >= parseInt(sectionGrey.getBoundingClientRect().top) && parseInt(badgeWrapper.getBoundingClientRect().top) + parseInt(badgeWrapper.offsetHeight) * 0.6 <= parseInt(sectionGrey.getBoundingClientRect().top) + parseInt(sectionGrey.offsetHeight)) {
-        badge.style.filter = "invert()";
-    } else {
-        badge.style.filter = "none";
-    }
-});
-*/
-
-
-
-
 
 
 window.addEventListener('scroll', function() {
@@ -108,7 +97,6 @@ window.addEventListener('scroll', function() {
     let sectionGreyY = parseInt(sectionGrey.getBoundingClientRect().top);
     let newBadgeWrapperY = parseInt(newBadgeWrapper.getBoundingClientRect().top);
     let sectionGreyHeight = parseInt(sectionGrey.offsetHeight);
-    //let newBadgeWrapperHeight = parseInt(sectionGrey.offsetHeight);
 
 
     if (sectionGreyY + 100 >= newBadgeWrapperY) {
@@ -117,10 +105,7 @@ window.addEventListener('scroll', function() {
         newBadgeWrapper.style.zIndex = 1;
         newBadgeWrapper2.style.zIndex = 0;
         newBadgeWrapper2.style.clipPath = '';
-        //console.log(parseInt(newBadgeWrapper.getBoundingClientRect().top) - parseInt(sectionGrey.getBoundingClientRect().top));    
-        //console.log('inset(0px 0px ' + clipPathVar + 'px 0px)');
     } else {
-        console.log('below');
         let clipPathVar = ( newBadgeWrapperY - (sectionGreyY + sectionGreyHeight) + 100 ).toString();
         newBadgeWrapper2.style.clipPath = 'inset(0px 0px ' + clipPathVar + 'px 0px)';
         newBadgeWrapper2.style.zIndex = 1;
@@ -187,12 +172,13 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
 
         gsap.to(bigTextPreFooter, {
             backgroundPosition: "50% 40%",
-            filter: 'hue-rotate(90deg)',
+            filter: 'hue-rotate(180deg)',
             scrollTrigger: {
                 trigger: ".big-text.pre-footer",
-                start: "-=500",
+                start: "-=700",
                 end: "+=500",
-                scrub: true
+                scrub: true,
+                markers: true
             }
         });
 
@@ -216,9 +202,13 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
     
         allImages.forEach(image => {
             image.addEventListener('mouseover', function () {
-                if (image.style.transform != 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg)') {
+                if (image.style.transform == 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg)') {
+                    gsap.to(image, {
+                        borderRadius: 20,
+                        duration: 0.2,
+                        scale: 1.02
+                    });
                     image.addEventListener('mouseover', function () {
-                        console.log(image.style.transform);
                         gsap.to(image, {
                             borderRadius: 20,
                             duration: 0.2,
@@ -233,6 +223,20 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
                         });
                     });
                 }
+            });
+        });
+        teamImage.addEventListener('mouseover', function () {
+            gsap.to(teamImage, {
+                borderRadius: 20,
+                duration: 0.2,
+                scale: 1.02
+            });
+        });
+        teamImage.addEventListener('mouseleave', function () {
+            gsap.to(teamImage, {
+                borderRadius: 0,
+                duration: 0.2,
+                scale: 1
             });
         });
     });
