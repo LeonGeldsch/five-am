@@ -177,8 +177,7 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
                 trigger: ".big-text.pre-footer",
                 start: "-=700",
                 end: "+=500",
-                scrub: true,
-                markers: true
+                scrub: true
             }
         });
 
