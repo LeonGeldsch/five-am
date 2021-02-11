@@ -8,6 +8,8 @@ var sectionGrey = document.querySelector(".section.grey");
 
 var menuGradientLight = document.querySelector(".menu_gradient.light");
 
+var cartWrapper = document.querySelector(".cart-wrapper-2");
+
 var popUpMenu = document.querySelector(".pop-up-menu");
 
 var menuLinks = document.querySelector(".menu_links");
@@ -171,12 +173,31 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
         });
 
         gsap.to(bigTextPreFooter, {
-            backgroundPosition: "50% 40%",
-            filter: 'hue-rotate(180deg)',
+            backgroundPosition: "50% 30%",
+            filter: 'hue-rotate(360deg)',
             scrollTrigger: {
                 trigger: ".big-text.pre-footer",
                 start: "-=700",
                 end: "+=1000",
+                scrub: true
+            }
+        });
+
+        gsap.to(menuGradientLight, {
+            filter: 'hue-rotate(720deg)',
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: true
+            }
+        });
+        gsap.to(cartWrapper, {
+            filter: 'hue-rotate(720deg)',
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
                 scrub: true
             }
         });
