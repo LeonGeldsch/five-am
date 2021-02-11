@@ -168,7 +168,7 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
         });
 
         gsap.to(bigTextPreFooter, {
-            backgroundPosition: "50% 0%",
+            backgroundPosition: "50% 30%",
             duration: 0
         });
 
@@ -177,8 +177,8 @@ $.getScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', fun
             filter: 'hue-rotate(360deg)',
             scrollTrigger: {
                 trigger: ".big-text.pre-footer",
-                start: "-=700",
-                end: "+=1000",
+                start: "-=100",
+                end: "+=" + parseInt(window.innerHeight),
                 scrub: true
             }
         });
