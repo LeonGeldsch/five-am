@@ -1,3 +1,20 @@
+/*
+ *
+ * Plugin for https://five-am.com/ 
+ * changelog:
+ * - made rotating badge image light over dark background
+ * - added/improved hover effect on images
+ * - made "5AM kennenlernen" button visisble
+ * - added a scroll effect on the pre footer text
+ * - made it possible to close the burger menu by clicking outside of it
+ * - added a scroll effect on burger menu and shopping cart background
+ * 
+ * GitHub repo link: https://github.com/LeonGeldsch/five-am
+ * 
+ */
+
+
+
 var body = document.querySelector("body");
 
 var badgeWrapper = document.querySelector(".badge_wrapper");
